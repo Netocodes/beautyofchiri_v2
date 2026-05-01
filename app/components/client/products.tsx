@@ -1,4 +1,4 @@
-import { useInfiniteProducts } from '@/lib/tanstackQueries/products/product'
+import { useProducts } from '@/lib/tanstackQueries/products/product';
 import { Filters } from '@/lib/types/productTypes';
 import React, { useState } from 'react'
 
@@ -13,11 +13,8 @@ const ProductswithFilter = () => {
 
     const {
         data,
-        fetchNextPage,
         isLoading,
-        hasNextPage,
-        isFetchingNextPage
-    } = useInfiniteProducts(filters);
+    } = useProducts(filters);
     if (isLoading) {
         return <div>loading..</div>
     }
@@ -27,20 +24,18 @@ const ProductswithFilter = () => {
             <h2>Products page</h2>
             <div>
                 {/* Products */}
-                {data?.pages.map((page, i) => (
-                    <div key={i}>
-                        {page.products.map((product) => (
-                            <p key={product.id}>{product.name}</p>
-                        ))}
-                    </div>
-                ))}
+                {/* {data?.products.map((, i) => (
+                <div key={i}>
+                    <p key={product.id}>{product.name}</p>
+                </div>
+                ))} */}
 
                 {/* Load more button */}
-                {hasNextPage && (
+                {/* {hasNextPage && (
                     <button onClick={() => fetchNextPage()}>
                         {isFetchingNextPage ? "Loading..." : "Load More"}
                     </button>
-                )}
+                )} */}
             </div>
         </div>
     )

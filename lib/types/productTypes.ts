@@ -6,15 +6,30 @@ export type Product = {
     description: string;
     category: string;
     tags: string[];
-    cover_image: File;
-    created_at: string; // timestamp
-    updated_at: string; // timestamp
-    images: string[]; // array of image URLs
-    instructions: string[]; // usage instructions
-    hasNoVariant: boolean; // if true, treat as single variant with base price
-    base_price: number
+    cover_image: string;
+    created_at: string;
+    updated_at: string;
+    images: string[];
+    instructions: string[];
+    base_price: number;
+};
+// export type BackendProduct = {
+//     id: string;
+//     product_id: string;
+//     name: string;
+//     slug: string;
+//     description: string;
+//     category: string;
+//     tags: string[];
+//     cover_image: File;
+//     created_at: string; // timestamp
+//     updated_at: string; // timestamp
+//     images: string[]; // array of image URLs
+//     instructions: string[]; // usage instructions
+//     hasNoVariant: boolean; // if true, treat as single variant with base price
+//     base_price: number
 
-}
+// }
 type variantPayload = {
     variant_code: string;
     size_label: string;
@@ -44,8 +59,10 @@ export type ProductVariants = {
     updated_at: string;
 }
 export type ProductWithVariants = Product & {
-    variants: ProductVariants[];
-}
+    variants?: ProductVariants[];
+    hasNoVariant: boolean;
+    displayPrice: number; // ✅ NEW FIELD
+};
 export type Filters = {
     search?: string;
     category?: string;

@@ -4,8 +4,11 @@ import "./globals.css";
 import ReactQueryProvider from "@/lib/reactQueryProviders";
 import ClientHydrate from "./components/client/clientHydrate";
 import { cn } from "@/lib/utils";
+// import ScrollVelocity from "./components/NetoBits/ScrollVelocity";
+import NavBar from "./components/client/navbar";
+import CurrencyProvider from "./components/client/fetchRates";
 
-const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
+const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +38,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReactQueryProvider>
-          <ClientHydrate>{children}</ClientHydrate>
+          <>
+            <CurrencyProvider>
+              <NavBar />
+              {children}
+            </CurrencyProvider>
+          </>
         </ReactQueryProvider>
       </body>
     </html>

@@ -10,7 +10,7 @@ export async function GET() {
     } = await supabase.auth.getUser();
 
     if (!user) {
-        return NextResponse.json({ error: "No user Found" }, { status: 401 });
+        return NextResponse.json({ error: "This user is Un-Authorized." }, { status: 401 });
     }
 
     // 📦 get profile
