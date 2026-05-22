@@ -6,8 +6,9 @@ import ProductList from "../components/client/productList";
 import Herosection from "../components/client/herosection";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../components/ui/breadcrumb";
 import { HomeIcon } from "lucide-react";
+import { Suspense } from "react";
 
-const BrowseProducts = () => {
+const BrowseProductContent = () => {
     const searchParams = useSearchParams();
     const searchQuery = searchParams.get('search');
     const category = searchParams.get('category');
@@ -51,4 +52,12 @@ const BrowseProducts = () => {
     )
 }
 
-export default BrowseProducts
+const BrowseProductPage = () => {
+    return (
+        <Suspense fallback={<div className="w-full h-[50dvh] flex items-center justify-center bg-gray-300" ><h4 className="text-4xl">Loading products...</h4></div>}>
+            <BrowseProductContent />
+        </Suspense>
+    )
+}
+
+export default BrowseProductPage;
