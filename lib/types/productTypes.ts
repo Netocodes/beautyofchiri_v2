@@ -81,3 +81,20 @@ export type ProductsResponse = {
     };
     filters: Filters;
 };
+export type productDetails = {
+    product_id: string;
+    instructions: string[];
+    benefits: string[];
+    created_at: string;
+    updated_at: string;
+}
+
+export type detailResponse = {
+    product: ProductWithVariants;
+    details: productDetails;
+
+}
+export type productDetailsResponse = {
+    success: boolean;
+    data: ProductWithVariants;
+}

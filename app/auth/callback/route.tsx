@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/client";
 import { profile } from "@/lib/types/profileType"
 
 export const GET = async (request: Request) => {
@@ -9,7 +9,7 @@ export const GET = async (request: Request) => {
 
     // ❌ No code → send back to login
     if (!code) {
-        console.error('no code found')
+        console.error('no callback exchange  code found')
         return NextResponse.redirect(new URL("/login", request.url));
     }
 

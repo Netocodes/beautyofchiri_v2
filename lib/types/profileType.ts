@@ -8,3 +8,7 @@ export type profile = {
     created_at: string;
     updated_at: string;
 }
+export type profileResponse = {
+    user: profile;
+    message: string;
+}

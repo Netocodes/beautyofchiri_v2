@@ -1,19 +1,28 @@
 import type { NextConfig } from "next";
-// const storageUrl = process.env.NEXT_PUBLIC_STORAGE_URL3 || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUzuBtU1PJQweAKoIKpiPduperujJFD4MM8A&s"
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**',
+        protocol: "https",
+        hostname: "vewtkqjkoxdcnaasbtty.supabase.co",
+        port: "",
+        pathname: "/storage/v1/object/**",
+      },
+      {
+        protocol: "https",
+        hostname: "freeiconspng.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.freeiconspng.com",
+        port: "",
+        pathname: "/**",
       },
     ],
   },
-  // images: {
-  //   domains: ['vewtkqjkoxdcnaasbtty.supabase.co'],
-  // },
 };
 
 export default nextConfig;

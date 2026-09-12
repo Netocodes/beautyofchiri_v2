@@ -1,15 +1,16 @@
 'use client'
 import Image from "next/image"
 import Marquee from "react-fast-marquee";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Search, User, X } from "lucide-react";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "../ui/input-group";
-import { useProfileStore } from "@/app/store/profile";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 import Link from "next/link";
 import { CartSidebar } from "./cartSidebar";
 import { useRouter } from "next/navigation";
 import { useDebounce } from "./debounceSearch";
+import { useGetProfile } from "@/lib/tanstackQueries/profile/profile";
+import { DropdownMenuAvatar } from "./avatar";
 const currencies = [
     { code: "NGN", label: "Naira", flag: "/nigerian.jpg" },
     { code: "TL", label: "Turkish Lira", flag: "/turkey.svg" },
@@ -24,8 +25,13 @@ const NavBar = () => {
 
     console.log(searchQuery)
     const debouncedSearch = useDebounce(searchQuery, 50);
-    const user = useProfileStore((state) => state.user)
-    console.log(user)
+    const { data: userData, isError, error } = useGetProfile()
+
+    if (isError) {
+        console.error("Error fetching profile:", isError);
+        console.error(error)
+    }
+
 
     useEffect(() => {
         if (searchOpen) {
@@ -100,7 +106,7 @@ const NavBar = () => {
                             <div className="flex items-center gap-x-2 ml-auto">
                                 {/* Currency */}
                                 <Select value={currency} onValueChange={setCurrency}>
-                                    <SelectTrigger className="flex items-center gap-2 border-none  text-lg px-2 py-1">
+                                    <SelectTrigger className="flex items-center gap-2 border-none  text-xs px-2 py-1">
                                         <Image
                                             src={currencies.find(c => c.code === currency)?.flag || ""}
                                             alt={currency}
@@ -126,10 +132,8 @@ const NavBar = () => {
                                 />
 
                                 {/* Account */}
-                                {user ? (
-                                    <span className="font-semibold text-gray-800">
-                                        Hi, {user.full_name}
-                                    </span>
+                                {userData ? (
+                                    <DropdownMenuAvatar image={userData.user.avatar_url} full_name={userData.user.full_name} />
                                 ) : (
                                     <Link href="/login">
                                         <User className="bg-bg-color text-white rounded-full size-8 p-1" />

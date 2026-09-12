@@ -31,23 +31,37 @@ const BrowseProductContent = () => {
 
             {/* {searchQuery && <p>{searchQuery}</p>} */}
             {/* {category && ( */}
-            <section className="py-3 px-2">
+            <section className="px-4 py-3">
                 <Breadcrumb>
-                    <BreadcrumbList>
-                        <BreadcrumbItem className="text-[9px]">
-                            <BreadcrumbLink href="/"><HomeIcon size={16} /></BreadcrumbLink>
+                    <BreadcrumbList className="flex-nowrap items-center gap-1.5 text-xs sm:text-sm">
+                        {/* Home Link */}
+                        <BreadcrumbItem className="shrink-0">
+                            <BreadcrumbLink
+                                href="/"
+                                className="inline-flex items-center gap-1.5 font-medium transition-colors hover:text-foreground"
+                            >
+                                <HomeIcon className="h-4 w-4 shrink-0" />
+                                <span>Homepage</span>
+                            </BreadcrumbLink>
                         </BreadcrumbItem>
 
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem className="text-[16px]">
-                            <BreadcrumbPage className="capitalize">{category || searchQuery}</BreadcrumbPage>
+                        <BreadcrumbSeparator className="shrink-0" />
+
+                        {/* Current Page / Category */}
+                        <BreadcrumbItem className="min-w-0">
+                            <BreadcrumbPage className="truncate font-semibold capitalize tracking-tight">
+                                {category || searchQuery}
+                            </BreadcrumbPage>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
             </section>
             {/* )} */}
 
-            <ProductList filters={{ search: searchQuery || undefined, category: category || undefined }} />
+            <section className="w-11/12 md:w-9/12 mx-auto">
+
+                <ProductList filters={{ search: searchQuery || undefined, category: category || undefined }} />
+            </section>
         </div>
     )
 }
